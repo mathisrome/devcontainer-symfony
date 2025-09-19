@@ -18,7 +18,4 @@ jobs:
           configFile: ./.devcontainer/symfony/devcontainer.json
           push: never
           # Change this to be your CI task/script
-          runCmd: |
-            composer install
-            phpstan analyse --level 3 src
-            phpcs --standard=PSR12 src
+          runCmd: composer install && phpstan analyse --level 3 src && phpcs --standard=PSR12 src
