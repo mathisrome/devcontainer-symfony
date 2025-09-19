@@ -11,10 +11,12 @@ final class HelloController extends AbstractController
     #[Route('/hello', name: 'app_hello')]
     public function index(): JsonResponse
     {
-        return $this->json([
+        return $this->json(
+            [
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/HelloController.php',
-        ]);
+            ]
+        );
     }
 }
 
