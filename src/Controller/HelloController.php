@@ -12,7 +12,7 @@ final class HelloController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json([
-            'message' => 'Welcome to your new controller!',
+            'message' => 'Welcome to your new controller!'
             'path' => 'src/Controller/HelloController.php',
         ]);
     }
