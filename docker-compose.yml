@@ -1,0 +1,24 @@
+services:
+  mariadb:
+    image: mariadb:11.1.2
+    restart: unless-stopped
+    volumes:
+      - ./.devcontainer/mariadb/volumes/database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toto44
+    ports:
+      - "3306:3306"
+  
+  symfony:
+    build:
+      context: ./.devcontainer/symfony
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mariadb
+    tty: true
+
+  mailcatcher:
+    restart: on-failure
+    image: schickling/mailcatcher
+    ports: [ 1025, 1080:1080 ]

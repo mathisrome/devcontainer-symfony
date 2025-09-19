@@ -1,0 +1,32 @@
+{
+  // See https://aka.ms/devcontainer.json for format details
+  "name": "Symfony Container",
+  "dockerComposeFile": ["../../docker-compose.yml"],
+  "service": "symfony",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "forwardPorts": [8000],
+
+  // A command to run after creating the container.
+  // This command is run after "updateContentCommand" and before "postStartCommand".
+  // If this is a single string, it will be run in a shell.
+  // If this is an array of strings, it will be run as a single command without shell.
+  // If this is an object, each provided command will be run in parallel.
+  "postCreateCommand": "composer install && symfony server:start",
+
+  //The path of the workspace folder inside the container.
+  "workspaceFolder": "/workspace",
+
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "xdebug.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-pack",
+        "devsense.phptools-vscode"
+      ]
+    }
+  }
+}
