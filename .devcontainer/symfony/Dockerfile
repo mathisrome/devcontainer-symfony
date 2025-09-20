@@ -33,6 +33,7 @@ RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
     && composer global config --no-plugins allow-plugins.phpro/grumphp true \
     && composer global require phpro/grumphp
     
+ENV GRUMPHP_PROJECT_DIR=/workspace
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 
 ## Phpstan
