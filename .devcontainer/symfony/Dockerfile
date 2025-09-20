@@ -30,9 +30,9 @@ RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
     && mv phpcbf.phar /usr/local/bin/phpcbf \
     && chmod +x /usr/local/bin/phpcbf \
     ## Grumphp
-    && curl -OL https://github.com/phpro/grumphp/releases/download/v2.15.0/grumphp.phar \
-    && mv grumphp.phar /usr/local/bin/grumphp \
-    && chmod +x /usr/local/bin/grumphp
+    && composer global config --no-plugins allow-plugins.phpro/grumphp true \
+    && composer global require phpro/grumphp \
+    && export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 ## Phpstan
 COPY --from=ghcr.io/phpstan/phpstan:latest-php8.3 /composer/vendor/phpstan/phpstan/phpstan.phar .

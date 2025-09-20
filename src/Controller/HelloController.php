@@ -16,7 +16,7 @@ final class HelloController extends AbstractController
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/HelloController.php',
             ]
-        );
+        );;
     }
 }
 
