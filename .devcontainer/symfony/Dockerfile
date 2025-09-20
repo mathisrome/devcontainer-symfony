@@ -34,11 +34,6 @@ RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
     && composer global require phpro/grumphp
 
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
-ENV GRUMPHP_PROJECT_DIR=/workspace
-ENV GRUMPHP_GIT_WORKING_DIR=/workspace
-ENV GRUMPHP_GIT_REPOSITORY_DIR=/workspace/.git
-ENV GRUMPHP_COMPOSER_DIR=/workspace
-ENV GRUMPHP_BIN_DIR=/root/.composer/vendor/bin
 
 ## Phpstan
 COPY --from=ghcr.io/phpstan/phpstan:latest-php8.3 /composer/vendor/phpstan/phpstan/phpstan.phar .
