@@ -9,7 +9,7 @@
   "forwardPorts": [8000],
 
   //The path of the workspace folder inside the container.
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspace/app",
   "mounts": [
     "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
   ],
