@@ -12,10 +12,6 @@ services:
   symfony:
     build:
       context: ./.devcontainer/symfony
-    command: 
-      - sh
-      - -c 
-      - composer install && symfony server:start
     volumes:
       - ./:/workspace
     depends_on:
