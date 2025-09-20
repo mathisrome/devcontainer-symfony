@@ -42,4 +42,4 @@ RUN mv phpstan.phar /usr/local/bin/phpstan \
 
 COPY ./config/project.ini /usr/local/etc/php/conf.d/project.ini
 
-WORKDIR /workspace
+WORKDIR /workspace/app
