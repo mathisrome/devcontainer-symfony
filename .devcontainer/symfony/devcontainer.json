@@ -18,6 +18,10 @@
     "symfony": "composer install"
   },
 
+  "postAttachCommand": {
+    "symfony": "symfony server:start --daemon"
+  },
+
   "customizations": {
     "vscode": {
       "settings": {},
