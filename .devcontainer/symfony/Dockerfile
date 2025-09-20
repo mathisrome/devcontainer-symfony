@@ -4,45 +4,30 @@ FROM php:8.3-fpm
 RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 ## PHP Extensions & Composer
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions gd \
-    exif \
-    pdo_mysql \
-    intl \
-    zip \
-    bcmath \
-    @composer
-
-RUN mkdir /var/www/.composer && chown -R www-data:www-data /var/www/.composer
-
-## Symfony CLI
-RUN curl -sS https://get.symfony.com/cli/installer | bash \
-    && mv /root/.symfony*/bin/symfony /usr/local/bin/symfony \
-    && symfony server:ca:install
+RUN curl -sSLf \
+        -o /usr/local/bin/install-php-extensions \
+        https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
+    && chmod +x /usr/local/bin/install-php-extensions \
+    && install-php-extensions gd \
+        exif \
+        pdo_mysql \
+        intl \
+        zip \
+        bcmath \
+        @composer
 
 ## DEV KIT
-## Phpcs
-RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
-    && mv phpcs.phar /usr/local/bin/phpcs \
-    && chmod +x /usr/local/bin/phpcs \
-    ## Phpcbf
-    && curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar \
-    && mv phpcbf.phar /usr/local/bin/phpcbf \
-    && chmod +x /usr/local/bin/phpcbf \
-    ## Grumphp
-    && composer global config --no-plugins allow-plugins.phpro/grumphp true \
-    && composer global require phpro/grumphp
+COPY ./config/devkit.sh /devkit.sh
+RUN chmod +x /devkit.sh \
+    && /devkit.sh
 
+## ENV Configuration grumphp
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 ENV GRUMPHP_PROJECT_DIR=/workspace/app
 ENV GRUMPHP_GIT_WORKING_DIR=/workspace
 ENV GRUMPHP_COMPOSER_DIR=/workspace/app
 
-## Phpstan
-COPY --from=ghcr.io/phpstan/phpstan:latest-php8.3 /composer/vendor/phpstan/phpstan/phpstan.phar .
-RUN mv phpstan.phar /usr/local/bin/phpstan \
-    && chmod +x /usr/local/bin/phpstan
-
+## Project Config
 COPY ./config/project.ini /usr/local/etc/php/conf.d/project.ini
 
 WORKDIR /workspace/app
