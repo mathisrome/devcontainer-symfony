@@ -14,8 +14,8 @@
     "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
   ],
 
-  "postAttachCommand": {
-    "symfony": "composer install && symfony server:start"
+  "postCreateCommand": {
+    "symfony": "composer install"
   },
 
   "customizations": {
