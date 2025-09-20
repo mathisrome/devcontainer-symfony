@@ -16,4 +16,4 @@ jobs:
           configFile: ./.devcontainer/symfony/devcontainer.json
           push: never
           # Change this to be your CI task/script
-          runCmd: git config --global --add safe.directory /workspace && composer install && phpstan analyse --level 3 src && phpcs --standard=PSR12 src
+          runCmd: git config --global --add safe.directory /workspace && composer install --no-dev && phpstan analyse --level 3 src && phpcs --standard=PSR12 src
