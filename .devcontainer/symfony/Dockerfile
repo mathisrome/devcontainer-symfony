@@ -17,9 +17,8 @@ RUN curl -sSLf \
         @composer
 
 ## DEV KIT
-COPY ./config/devkit.sh /devkit.sh
-RUN chmod +x /devkit.sh \
-    && /devkit.sh
+COPY ./config/devkit.sh /tmp/devkit.sh
+RUN bash /tmp/devkit.sh
 
 ## ENV Configuration grumphp
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
